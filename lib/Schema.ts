@@ -7,7 +7,7 @@ interface SchemaConfiguration {
     [field: string]: SchemaConfigurationValue
 };
 
-export default class Schema {
+export class Schema {
     schemaConfiguration: SchemaConfiguration;
     constructor(schemaConfiguration: SchemaConfiguration) {
         this.schemaConfiguration = schemaConfiguration;
