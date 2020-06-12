@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    // "noImplicitAny": true,
+    "preserveConstEnums": true,
+    "sourceMap": true
+  },
+  "include": ["lib/**/*"],
+  "exclude": ["node_modules"]
+}

@@ -15,7 +15,7 @@ export default class Schema {
 
     toSQL(){
         // [[key, value], [key2, value2]]
-        return Object.entries(this.schemaConfiguration).map(([field, {type, required}]) => {
+        return Object.entries(this.schemaConfiguration).map(([field: string, {type, required}]) => {
             return `${field} ${type} ${required ? 'NOT NULL' : ''}`;
         });
     }
