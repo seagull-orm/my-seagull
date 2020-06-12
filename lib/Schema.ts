@@ -12,4 +12,19 @@ export default class Schema {
     constructor(schemaConfiguration: SchemaConfiguration) {
         this.schemaConfiguration = schemaConfiguration;
     }
+
+    toSQL(){
+        // [[key, value], [key2, value2]]
+        return Object.entries(this.schemaConfiguration).map(([field, {type, required}]) => {
+            return `${field} ${type} ${required ? 'NOT NULL' : ''}`;
+        });
+    }
 }
+
+
+// {
+//     name: {
+//         type: Text,
+//         required: true
+//     }
+// }
