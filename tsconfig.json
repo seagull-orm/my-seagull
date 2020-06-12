@@ -3,7 +3,8 @@
     "module": "CommonJS",
     // "noImplicitAny": true,
     "preserveConstEnums": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "lib": ["esnext"] 
   },
   "include": ["lib/**/*"],
   "exclude": ["node_modules"]
