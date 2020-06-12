@@ -1,22 +1,25 @@
+import * as pluralize from 'pluralize';
 import Schema from './Schema';
-import pluralize from 'pluralize';
+import client from './Client';
 
 export default class Model {
   tableName: string;
   schema: Schema;
-  constructor(name: string, schema: Schema){
+  constructor(name: string, schema: Schema) {
     this.tableName = pluralize(name).toLowerCase();
     this.schema = schema;
   }
 
-  init(){
-    const schemaFields = this.schema.toSQL()
-    .join(', ')
-
-    return `CREATE TABLE ${this.tableName}(${schemaFields});`
+  init() {
+    const schemaFields = this.schema.toSQL().join(', ')
+    return client.query(`CREATE TABLE ${this.tableName}(${schemaFields});`)
   }
+
+  insert(object) {
+    const valuesString = Object.keys(object).map((_, i) => `$${i + 1}`).join(', ')
+    return client.query(
+      `INSERT INTO ${this.tableName}(${Object.keys(object).join(', ')}) VALUES(${valuesString})`,
+      Object.values(object)
+    );
+  };
 }
-
-//CREATE TABLE account(	user_id serial PRIMARY KEY,	username VARCHAR (50) UNIQUE NOT NULL,password VARCHAR (50) NOT NULL,	email VARCHAR (355) UNIQUE NOT NULL,	created_on TIMESTAMP NOT NULL,	last_login TIMESTAMP);
-
-// add a .init() method that creates a table
